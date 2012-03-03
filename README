@@ -1,0 +1,82 @@
+### fwd4lang - Forward URL for your Language 
+###     It's based on "HelloWeb", Copyright (C) 2008  Sergey Astanin.
+###     Copyright (C) 2012 Yishin Li
+
+Features:
+
+* forward url based on browser language
+* simple and easy to use 
+* free of charge hosting is available (Google AppEngine)
+* distributed under the terms of GNU Affero GPL
+
+### Installation instructions
+
+### 1. Download the source code
+
+You can get the latest version from [Git repository](git://github.com/artek/fwd4lang.git):
+
+    $ git clone git://github.com/artek/fwd4lang.git
+
+### 2. Register at Google AppEngine
+
+Registered users now can install up to 10 applications free of charge. You have to create a new application.
+Download also AppEngine SDK. It allows for previewing the site locally. Also it manages upload to AppEngine.
+
+### 3. Configure installation
+
+In `app.yaml` in `application:` field indicate the name of your application at AppEngine.  If your application is named `example`, then in `app.yaml` you have to write this:
+
+    application: fwd4lang
+
+Change the template as you like. Feel free to do any other changes, but please publish the modified code, as it is required by the terms of GNU Affero GPL.
+
+### 4. Test locally
+
+Run site with `dev_appserver.py` from AppEgnine SDK:
+    $ cd ~/proj/app_engine
+    $ google_appengine/dev_appserver.py fwd4lang # w/o logging.debug()
+    $ google_appengine/dev_appserver.py --debug fwd4lang # w/ logging.debug()
+    # Getting logging.debug() to work on Google App Engine/Python:
+    # http://stackoverflow.com/questions/2982959/getting-logging-debug-to-work-on-google-app-engine-python
+
+The site will be visible as http://localhost:8080/
+
+### 5. Upload to AppEngine
+
+`appcfg.py` utility from AppEngine SDK does this:
+    $ cd ~/proj/app_engine
+    $ google_appengine/appcfg.py update fwd4lang
+
+Done! Now you can start using your new dynamic site on appspot.com.
+
+### 6. Manage AppEngine applications with Google Apps account:
+    https://appengine.google.com/a/your-domain.com
+    https://appengine.google.com/a/araisrobo.com
+
+### 7. Create Google Sites for different languages
+    https://sites.google.com/a/your-domain.com
+    https://sites.google.com/a/araisrobo.com
+    = create a site for English
+        * location: /en
+    = create a site for Traditional Chinese
+        * location: /zh_tw
+    = how to rename your site: 
+        * copy original site
+            + Sites->Select site for renaming
+            + More->Manage site->Copy this Site
+            + set location as new site name
+        * delete original site
+            + Sites->Select site for renaming
+            + More->Manage site->Delete this Site
+
+### 8. Web address mapping with Google Apps Dashboard:
+    https://www.google.com/a/cpanel/your-domain.com/Dashboard
+    https://www.google.com/a/cpanel/araisrobo.com/Dashboard
+    = Dashboard->Settings->Sites->Web Address Mapping:
+        * map en.araisrobo.com to en
+        * map zh-tw.araisrobo.com to zh_tw
+    = Dashboard->Settings->fwd4lang->Web Address Mapping:
+        * map www.araisrobo.com to fwd4lang.appspot.com
+
+You can find additional information about `dev_appserver.py`, `appcfg.py` and `app.yaml` AppEngine SDK documentation.
+
