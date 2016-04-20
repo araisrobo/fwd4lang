@@ -19,10 +19,9 @@
 
 import re
 
-from google.appengine.ext import webapp
-from google.appengine.ext.webapp.util import run_wsgi_app
+import webapp2
 
-import logging
+# import logging
 
 def parse_accept_language(accept_language):
 	"Parse Accept-Language header. See RFC2616, sec. 14."
@@ -34,7 +33,7 @@ def parse_accept_language(accept_language):
 	ll=[ re.sub('-','_',l).lower() for l in ll ]
 	return ll 
 
-class MainPage(webapp.RequestHandler):
+class MainPage(webapp2.RequestHandler):
 	@staticmethod
 	def languages(request):
 		al=request.headers.get('Accept-Language')
@@ -42,22 +41,14 @@ class MainPage(webapp.RequestHandler):
 
 	def get(self,action=''):
             lang = self.languages(self.request)
-            logging.debug('lang='+lang[0])
+            # logging.debug('lang='+lang[0])
             if (re.match("^en", lang[0]) != None):
                 url='http://en.araisrobo.com/'
-            elif (re.match("^zh", lang[0]) != None):
-                url='http://zh-tw.araisrobo.com/'
+            # elif (re.match("^zh", lang[0]) != None):
+            #     url='http://zh-tw.araisrobo.com/'
             else:
                 # default to english
                 url='http://en.araisrobo.com/'
 	    self.redirect(url)
 
-application = webapp.WSGIApplication(
-                                     [(r'/(.*)', MainPage)], 
-                                     debug=True)
-
-def main():
-    run_wsgi_app(application)
-
-if __name__ == "__main__":
-	main()
+app = webapp2.WSGIApplication([(r'/(.*)', MainPage)])

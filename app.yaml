@@ -1,7 +1,8 @@
 application: fwd4lang
 version: 1
-runtime: python
+runtime: python27
 api_version: 1
+threadsafe: true
 
 handlers:
 - url: /robots.txt
@@ -9,4 +10,4 @@ handlers:
   upload: static/robots.txt
 
 - url: /.*
-  script: index.py
+  script: fwd4lang.app
